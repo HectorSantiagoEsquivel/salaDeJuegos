@@ -1,0 +1,151 @@
+/* Variables reutilizables (coherentes con tu diseño) */
+$primary-color: #56baed;
+$secondary-color: #5fbae9;
+$text-color: #0d0d0d;
+$light-gray: #f6f6f6;
+$border-gray: #dce8f1;
+$error-color: #ff3860;
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: $primary-color;
+  padding: 20px;
+}
+
+#formContent {
+  background: white;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 450px;
+  padding: 30px;
+  box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
+  text-align: center;
+  animation: fadeInDown 1s ease;
+
+  /* Tabs Login/Registro */
+  .tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+
+    h2 {
+      cursor: pointer;
+      margin: 0 15px;
+      padding-bottom: 5px;
+      color: #cccccc;
+      font-size: 16px;
+      font-weight: 600;
+      text-transform: uppercase;
+
+      &.active {
+        color: $text-color;
+        border-bottom: 2px solid $secondary-color;
+      }
+    }
+  }
+
+  /* Estilos comunes para inputs */
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="file"] {
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: block !important;
+    position: static !important;
+    background-color: $light-gray;
+    border: none;
+    color: $text-color;
+    padding: 15px 32px;
+    text-align: center;
+    width: 85%;
+    margin: 5px auto;
+    border: 2px solid $light-gray;
+    border-radius: 5px;
+    transition: all 0.5s ease;
+
+    &:focus {
+      background-color: white;
+      border-bottom: 2px solid $secondary-color;
+    }
+  }
+
+  /* Botones */
+  input[type="submit"] {
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: block !important;
+    position: static !important;
+    background-color: $primary-color;
+    border: none;
+    color: white;
+    padding: 15px 80px;
+    text-transform: uppercase;
+    font-size: 13px;
+    border-radius: 5px;
+    margin: 20px 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 30px 0 rgba(95, 186, 233, 0.4);
+
+    &:hover {
+      background-color: darken($primary-color, 10%);
+    }
+
+    &:active {
+      transform: scale(0.95);
+    }
+  }
+
+  /* Upload de avatar */
+  .avatar-upload {
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: block !important;
+    position: static !important;
+    margin: 15px 0;
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: $text-color;
+      font-size: 14px;
+    }
+
+    input[type="file"] {
+      padding: 10px;
+      width: 80%;
+    }
+  }
+
+  /* Mensajes de error (opcional) */
+  .error-message {
+    color: $error-color;
+    font-size: 12px;
+    margin-top: 5px;
+  }
+}
+
+/* Animaciones (reutilizadas de tu diseño original) */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translate3d(0, -20px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.fadeIn {
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

@@ -1,0 +1,68 @@
+/* styles.scss */
+@import url('https://fonts.googleapis.com/css?family=Poppins');
+
+/* Variables globales (colores, fuentes, etc.) */
+:root {
+  --primary-color: #56baed;
+  --secondary-color: #5fbae9;
+  --text-color: #0d0d0d;
+  --light-gray: #f6f6f6;
+  --border-gray: #dce8f1;
+  --inactive-color: #cccccc;
+}
+
+/* Estilos base */
+html, body {
+  font-family: "Poppins", sans-serif;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  background-color: var(--primary-color);
+}
+
+a {
+  color: #92badd;
+  text-decoration: none;
+  font-weight: 400;
+}
+
+/* Estructuras reutilizables (ej. contenedores flex) */
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Animaciones globales */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.fadeIn {
+  opacity: 0;
+  animation: fadeIn ease-in 1;
+  animation-fill-mode: forwards;
+  animation-duration: 1s;
+}
+
+.fadeIn.delay-1 { animation-delay: 0.4s; }
+.fadeIn.delay-2 { animation-delay: 0.6s; }
+.fadeIn.delay-3 { animation-delay: 0.8s; }
+.fadeIn.delay-4 { animation-delay: 1s; }
+
+/* Efecto hover para enlaces */
+.underlineHover:after {
+  display: block;
+  left: 0;
+  bottom: -10px;
+  width: 0;
+  height: 2px;
+  background-color: var(--primary-color);
+  content: "";
+  transition: width 0.2s;
+}
+
+.underlineHover:hover:after {
+  width: 100%;
+}

@@ -1,0 +1,46 @@
+.app-container {
+  display: flex;
+  min-height: 100vh; // Ocupa toda la altura
+}
+
+/* --- Botonera --- */
+.sidebar {
+  width: 150px; // Ancho fijo
+  background: #fff; // Fondo blanco como las tarjetas
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); // Sombra sutil
+  padding: 20px 0;
+}
+
+.vertical-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; // Espacio entre botones
+}
+
+.nav-button {
+  background: none;
+  border: none;
+  padding: 12px 20px;
+  text-align: left;
+  cursor: pointer;
+  color: #0d0d0d; // Color de texto del login
+  font-family: "Poppins", sans-serif;
+  transition: all 0.3s;
+  
+  &:hover {
+    background: #f6f6f6; // Fondo gris claro al hover
+    color: #56baed; // Azul del login
+  }
+
+  i {
+    margin-right: 10px; // Espacio entre ícono y texto
+    color: #56baed; // Azul del login
+  }
+}
+
+/* --- Contenido principal --- */
+.main-content {
+  flex: 1; // Ocupa el resto del espacio
+  padding: 20px;
+
+}
