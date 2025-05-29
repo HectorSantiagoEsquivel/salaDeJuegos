@@ -65,7 +65,6 @@ export class PreguntadosComponent {
 
   detenerContador() {
     clearInterval(this.intervalId);
-    this.tiempoRestante = 7;
   }
 
   seleccionarOpciones(): void {
@@ -122,7 +121,7 @@ verificarRespuesta(opcionObtenida: string): void {
     setTimeout(() => {
       this.score++;
       this.mostrarImagen = false;     // Oculta sprite para la próxima ronda
-      this.tiempoRestante = 7;
+      this.tiempoRestante++;
       this.inicializarJuego();        // Carga nueva pregunta
       this.iniciarContador();         // Reinicia timer
     }, 1000); // Espera 1 segundo mostrando el sprite

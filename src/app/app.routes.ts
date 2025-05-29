@@ -36,9 +36,5 @@ export const routes: Routes = [
     {
         path: "mayoromenor",
         component: MayorOMenorComponent
-    },
-    {
-        path: "evitalasespinas",
-        component: EvitaLasEspinasComponent
-    }*/
+    },*/
 ];

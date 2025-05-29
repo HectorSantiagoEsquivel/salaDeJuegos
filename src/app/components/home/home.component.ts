@@ -16,14 +16,14 @@ export class HomeComponent {
       id: 0,
       url: '../../../assets/images/preguntados.png',
       titulo: "Preguntados",
-      descripcion: "El emocionante juego de preguntas y respuestas que pondrá a prueba tu conocimiento en diversas categorías. Prepárate para desafiar tu mente con preguntas intrigantes y divertidas, y compite para convertirte en el verdadero Maestro del Preguntados.",
+      descripcion: "¿Podrás adivinar de qué Pokémon se trata solo viendo su silueta? Demostrá tu memoria y conocimiento de la Pokédex en este desafío inspirado en el clásico segmento del anime.",
       route: '/preguntados' // Add the route for each game
     },
     {
       id: 1,
       url: '../../../assets/images/ahorcado.png',
       titulo: "Ahorcado",
-      descripcion: "El juego clásico de adivinanzas donde debes descubrir una palabra oculta, adivinando una letra a la vez. Cada letra incorrecta resulta en una parte del cuerpo del hombre colgado en la horca en el tablero. El objetivo es completar la palabra antes de que el dibujo del ahorcado esté completo.",
+      descripcion: "El clásico juego de las letras donde tenés que adivinar una palabra oculta, eligiendo una letra por vez.",
       route: '/ahorcado' // Add the route for each game
     },
     /*{
