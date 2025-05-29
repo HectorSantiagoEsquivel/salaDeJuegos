@@ -1,0 +1,43 @@
+<div class="ahorcado-container">
+  <header class="game-header">
+    <h1 class="game-title">Ahorcado</h1>
+    <div class="game-stats">
+      <div class="stat-box">
+        <span class="stat-label">Vidas</span>
+        <span class="stat-value">{{ vidas }}</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-label">Puntos</span>
+        <span class="stat-value">{{ score }}</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="game-content">
+    <div class="hangman-image">
+      <img [src]="'../../../../assets/images/JuegoAhorcado' + vidas + '.png'" 
+           alt="Estado del ahorcado" />
+    </div>
+
+    <div class="word-display">
+      <span *ngFor="let char of palabraJugador.split('')" 
+            class="word-char">{{ char }}</span>
+    </div>
+
+    <div class="keyboard">
+      <div *ngFor="let row of keyboardRows" class="keyboard-row">
+        <button *ngFor="let letra of row"
+                (click)="eligeLetra(letra)"
+                class="key"
+                [disabled]="!letrasHabilitadas[letras.indexOf(letra)]"
+                [class.used]="!letrasHabilitadas[letras.indexOf(letra)]">
+          {{ letra }}
+        </button>
+      </div>
+    </div>
+
+    <button class="reset-btn" (click)="reiniciarJuego()">
+      Reiniciar Juego
+    </button>
+  </main>
+</div>

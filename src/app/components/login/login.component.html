@@ -1,26 +1,25 @@
 <div class="wrapper fadeInDown">
   <div id="formContent">
-    <!-- Tabs para alternar entre Login/Registro -->
     <div class="tabs">
       <h2 [class.active]="modo" (click)="cambiarEstado()">Log In</h2>
       <h2 [class.active]="!modo" (click)="cambiarEstado()">Registrarme</h2>
     </div>
 
-    <!-- Formulario de Login -->
     <form *ngIf="modo" (ngSubmit)="login()">
       <input type="email" id="usuarioLogin" class="fadeIn third" [(ngModel)]="usuarioLogin" name="usuarioLogin" placeholder="Email" required>
       <input type="password" id="passwordLogin" class="fadeIn second" [(ngModel)]="passwordLogin" name="passwordLogin" placeholder="Contraseña" required>
+      
+      <button type="button" class="fadeIn fifth quick-access-button" (click)="fillQuickAccess()">Acceso Rápido</button>
+      
       <input type="submit" class="fadeIn fourth" value="Log In">
     </form>
 
-    <!-- Formulario de Registro -->
     <form *ngIf="!modo" (ngSubmit)="register()">
       <input type="text" id="usuarioSingup" class="fadeIn third" [(ngModel)]="usuarioSingup" name="usuarioSingup" placeholder="Nombre de usuario" required>
       <input type="email" id="email" class="fadeIn second" [(ngModel)]="email" name="email" placeholder="Email" required>
       <input type="password" id="passwordSingup" class="fadeIn second" [(ngModel)]="passwordSingup" name="passwordSingup" placeholder="Contraseña" required>
       <input type="password" id="confirmPassword" class="fadeIn second" [(ngModel)]="confirmPassword" name="confirmPassword" placeholder="Confirmar contraseña" required>
       
-      <!-- Campo opcional para avatar -->
       <div class="avatar-upload fadeIn third">
         <label for="avatar">Avatar (opcional):</label>
         <input type="file" id="avatar" (change)="onFileSelected($event)" accept="image/*">

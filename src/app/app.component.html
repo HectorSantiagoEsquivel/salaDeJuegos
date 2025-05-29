@@ -2,14 +2,21 @@
   <!-- Botonera vertical -->
   <div class="sidebar">
     <nav class="vertical-nav">
-      <button class="nav-button" routerLink="/about">
-        <i class="fas fa-user"></i> Quién Soy
-      </button>
+
       @if (!isLoggedIn) {
         <button class="nav-button" routerLink="/login">
           <i class="fas fa-sign-in-alt"></i> Login/Registro
         </button>
       } @else {
+        <button class="nav-button" routerLink="/home">
+          <i class="fas fa-user"></i> Juegos
+        </button>
+        <button class="nav-button" routerLink="/about">
+          <i class="fas fa-user"></i> Quién Soy
+        </button>
+        <button class="nav-button" routerLink="/chat">
+          <i class="fas fa-user"></i> Chat
+        </button>
         <button class="nav-button" (click)="logout()">
           <i class="fas fa-sign-out-alt"></i> Cerrar sesión
         </button>

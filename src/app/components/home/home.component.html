@@ -1,9 +1,20 @@
-<div class="about-container">
-  <div class="profile-card">
-    <div class="profile-header"></div>
-    <img [src]="userProfile.avatarUrl" alt="Foto de perfil" class="profile-img" 
-         *ngIf="userProfile.avatarUrl">
-    <h1>{{ userProfile.name }}</h1>
-    <h2>{{ userProfile.email }}</h2>
+<div class="home-container">
+  <div class="carousel-wrapper"> <div class="carousel">
+      <img [src]="getItemUrl()" alt="{{ getItemTitle() }}" class="carousel-image">
+
+      <div class="carousel-content">
+        <h2>{{ getItemTitle() }}</h2>
+        <p>{{ getItemDes() }}</p>
+        <button class="play-button" (click)="Jugar()">Jugar</button>
+      </div>
+
+      <div class="carousel-nav">
+        <div *ngFor="let item of carrouselItems; let i = index"
+             class="nav-dot"
+             [class.active]="activeItemsIndex === i"
+             (click)="selectItem(i)">
+        </div>
+      </div>
+    </div>
   </div>
 </div>

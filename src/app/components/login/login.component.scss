@@ -13,6 +13,7 @@ $error-color: #ff3860;
   min-height: 100vh;
   background-color: $primary-color;
   padding: 20px;
+  box-sizing: border-box; /* Ensures padding is included in element's total width and height */
 }
 
 #formContent {
@@ -24,6 +25,7 @@ $error-color: #ff3860;
   box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
   text-align: center;
   animation: fadeInDown 1s ease;
+  box-sizing: border-box; /* Ensures padding is included in element's total width and height */
 
   /* Tabs Login/Registro */
   .tabs {
@@ -61,38 +63,64 @@ $error-color: #ff3860;
     color: $text-color;
     padding: 15px 32px;
     text-align: center;
-    width: 85%;
+    width: 85%; /* Keep consistent width */
     margin: 5px auto;
     border: 2px solid $light-gray;
     border-radius: 5px;
     transition: all 0.5s ease;
+    box-sizing: border-box; /* Ensure consistency */
 
     &:focus {
       background-color: white;
       border-bottom: 2px solid $secondary-color;
     }
+
+    &::placeholder { /* Style placeholder text */
+      color: #999;
+    }
   }
 
-  /* Botones */
-  input[type="submit"] {
+  /* Botones (input[type="submit"] and the new quick-access-button) */
+  input[type="submit"],
+  .quick-access-button { /* Apply common button styles here */
     opacity: 1 !important;
     visibility: visible !important;
     display: block !important;
     position: static !important;
-    background-color: $primary-color;
     border: none;
     color: white;
-    padding: 15px 80px;
+    padding: 15px 80px; /* Adjust padding for consistency */
     text-transform: uppercase;
     font-size: 13px;
     border-radius: 5px;
-    margin: 20px 0;
     cursor: pointer;
     transition: all 0.3s ease;
+    width: 85%; /* Match input width */
+    margin: 10px auto; /* Adjust margin for spacing between buttons/inputs */
+    box-sizing: border-box; /* Ensure consistency */
+  }
+
+  /* Specific style for submit button */
+  input[type="submit"] {
+    background-color: $primary-color;
     box-shadow: 0 10px 30px 0 rgba(95, 186, 233, 0.4);
 
     &:hover {
       background-color: darken($primary-color, 10%);
+    }
+
+    &:active {
+      transform: scale(0.95);
+    }
+  }
+
+  /* Specific style for quick-access-button */
+  .quick-access-button {
+    background-color: #6c757d; /* A subtle grey, or choose another color from your palette */
+    box-shadow: 0 10px 30px 0 rgba(108, 117, 125, 0.3); /* Similar shadow but for grey */
+
+    &:hover {
+      background-color: darken(#6c757d, 10%);
     }
 
     &:active {
@@ -106,7 +134,10 @@ $error-color: #ff3860;
     visibility: visible !important;
     display: block !important;
     position: static !important;
-    margin: 15px 0;
+    margin: 15px auto; /* Center the div */
+    width: 85%; /* Match the width of other inputs */
+    text-align: left; /* Align label and input to the left within this div */
+    box-sizing: border-box; /* Ensure consistency */
 
     label {
       display: block;
@@ -117,7 +148,8 @@ $error-color: #ff3860;
 
     input[type="file"] {
       padding: 10px;
-      width: 80%;
+      width: 100%; /* Take full width of its parent (.avatar-upload) */
+      box-sizing: border-box; /* Crucial for file input padding */
     }
   }
 
@@ -141,9 +173,20 @@ $error-color: #ff3860;
   }
 }
 
-.fadeIn {
-  animation: fadeIn 0.5s ease;
+/* Updated fadeIn classes for order */
+.fadeIn.second {
+  animation: fadeIn 0.5s ease 0.1s backwards; /* Added delay */
 }
+.fadeIn.third {
+  animation: fadeIn 0.5s ease 0.2s backwards; /* Added delay */
+}
+.fadeIn.fourth {
+  animation: fadeIn 0.5s ease 0.3s backwards; /* Added delay */
+}
+.fadeIn.fifth {
+  animation: fadeIn 0.5s ease 0.4s backwards; /* Added delay for the new button */
+}
+
 
 @keyframes fadeIn {
   from { opacity: 0; }

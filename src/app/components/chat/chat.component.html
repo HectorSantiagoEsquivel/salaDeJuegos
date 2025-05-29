@@ -1,0 +1,54 @@
+<div class="chat-container">
+  <div class="chat-header">
+    <div class="header-content">
+      <h1><i class="material-icons">forum</i> Sala de Chat</h1>
+    </div>
+  </div>
+
+  <div class="messages-container" #messagesContainer>
+    <div *ngIf="isLoading" class="loading">
+      <div class="spinner"></div>
+      <span>Cargando mensajes...</span>
+    </div>
+
+    <div *ngFor="let message of messages" class="message-row"
+         [ngClass]="{'current-user': message.idUsuario === currentUserData?.authId}">
+      <div class="message-bubble">
+        <div *ngIf="message.idUsuario !== currentUserData?.authId" class="message-meta">
+          <span class="user-avatar">
+            {{ (message.usuarios?.name || 'A').charAt(0).toUpperCase() }}
+          </span>
+          <span class="user-name">
+            {{ message.usuarios?.name || 'Anónimo' }}
+          </span>
+        </div>
+        <div class="message-text">
+          {{ message.mensaje }}
+        </div>
+        <div class="message-footer">
+          <span class="message-time">
+            {{ formatDate(message.fecha) }}
+          </span>
+          <span *ngIf="message.idUsuario === currentUserData?.authId" class="message-status">
+            <i class="material-icons">done_all</i>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="message-input-container">
+    <div class="input-wrapper">
+      <textarea
+        [(ngModel)]="messageText"
+        placeholder="Escribe un mensaje..."
+        (keyup.enter)="sendMessage()"
+        rows="1"
+        #messageInput
+      ></textarea>
+      <button (click)="sendMessage()" [disabled]="!messageText.trim()">
+        <i class="material-icons">send</i>
+      </button>
+    </div>
+  </div>
+</div>

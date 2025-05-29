@@ -1,0 +1,38 @@
+<div class = "contenido">
+
+    <div class = "juego">
+        <div class = "espacioJuego">
+        <div class = "espacioPregunta">
+            <h2 class="texto">¿Quién es ese Pokémon?</h2>
+
+            <div class = "imagen">
+                <img src = {{actualizarImagen()}} style="width: 300px; height: 300px;" [class.revealed]="mostrarImagen" > 
+            </div>
+ 
+        </div>
+
+        <div class = cantidades>
+            <h2 class = "puntos">Puntos: {{score}}</h2>
+            <!-- <h2 class = "cant-preguntas">Preguntas: {{score}}/3 </h2> -->
+
+        </div>
+
+        <div class="timer">
+            <h2>{{ tiempoRestante }}</h2>
+        </div>
+        
+
+        <div class = "opciones">
+            <button class = "opcion" (click)="verificarRespuesta(opcionUno)">{{ opcionUno }}</button>
+            <button class = "opcion" (click)="verificarRespuesta(opcionDos)">{{ opcionDos }}</button>
+            <button class = "opcion" (click)="verificarRespuesta(opcionTres)">{{ opcionTres }}</button>
+            <button class = "opcion" (click)="verificarRespuesta(opcionCuatro)">{{ opcionCuatro }}</button>
+        </div>
+
+        </div>
+
+    </div>
+
+
+</div>
+

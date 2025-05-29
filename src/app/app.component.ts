@@ -4,6 +4,7 @@ import { RouterLink, RouterOutlet } from '@angular/router';
 import { Router } from '@angular/router';
 import { supabase } from './services/supabase';
 
+
 @Component({
   selector: 'app-root',
   standalone: true, 
@@ -18,16 +19,22 @@ export class AppComponent {
     this.checkAuthState();
   }
 
-  async checkAuthState() {
-    
-    const { data: { session } } = await supabase.auth.getSession();
-    this.isLoggedIn = !!session;
-    
-    
-    supabase.auth.onAuthStateChange((_event, session) => {
-      this.isLoggedIn = !!session;
-    });
+async checkAuthState() {
+  const { data: { session } } = await supabase.auth.getSession();
+  this.isLoggedIn = !!session;
+
+  if (!this.isLoggedIn) {
+    this.router.navigate(['/login']);
   }
+
+  supabase.auth.onAuthStateChange((_event, session) => {
+    this.isLoggedIn = !!session;
+    if (!this.isLoggedIn) {
+      this.router.navigate(['/login']);
+    }
+  });
+}
+
 
   async logout() {
     await supabase.auth.signOut();
