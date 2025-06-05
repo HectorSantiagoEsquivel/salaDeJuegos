@@ -1,0 +1,74 @@
+<div class="encuesta-container">
+  <h2>Encuesta de Juegos</h2>
+  <p *ngIf="userName">Hola, {{ userName }}! Por favor, completa la encuesta.</p>
+  <p *ngIf="!userName && userEmail">Hola, {{ userEmail }}! Por favor, completa la encuesta.</p>
+  <p *ngIf="!userName && !userEmail">Por favor, completa la encuesta.</p>
+
+  <form *ngIf="form" [formGroup]="form" (ngSubmit)="enviarForm()" class="encuesta-form">
+
+    <div class="form-group">
+      <label for="nombre">Nombre</label>
+      <input type="text" id="nombre" formControlName="nombre" placeholder="Tu nombre">
+      <div *ngIf="nombre?.invalid && (nombre?.dirty || nombre?.touched || submitted)" class="error-message">
+        <div *ngIf="nombre?.errors?.['required']">El nombre es requerido.</div>
+        <div *ngIf="nombre?.errors?.['pattern']">El nombre solo debe contener letras.</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="apellido">Apellido</label>
+      <input type="text" id="apellido" formControlName="apellido" placeholder="Tu apellido">
+      <div *ngIf="apellido?.invalid && (apellido?.dirty || apellido?.touched || submitted)" class="error-message">
+        <div *ngIf="apellido?.errors?.['required']">El apellido es requerido.</div>
+        <div *ngIf="apellido?.errors?.['pattern']">El apellido solo debe contener letras.</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="edad">Edad</label>
+      <input type="number" id="edad" formControlName="edad" placeholder="Tu edad">
+      <div *ngIf="edad?.invalid && (edad?.dirty || edad?.touched || submitted)" class="error-message">
+        <div *ngIf="edad?.errors?.['required']">La edad es requerida.</div>
+        <div *ngIf="edad?.errors?.['min']">Debes tener al menos 18 años.</div>
+        <div *ngIf="edad?.errors?.['max']">La edad máxima es 99 años.</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="telefono">Teléfono</label>
+      <input type="tel" id="telefono" formControlName="telefono" placeholder="Ej: 1123456789">
+      <div *ngIf="telefono?.invalid && (telefono?.dirty || telefono?.touched || submitted)" class="error-message">
+        <div *ngIf="telefono?.errors?.['required']">El teléfono es requerido.</div>
+        <div *ngIf="telefono?.errors?.['pattern']">El teléfono solo debe contener números.</div>
+        <div *ngIf="telefono?.errors?.['minlength']">El teléfono debe tener al menos 6 dígitos.</div>
+        <div *ngIf="telefono?.errors?.['maxlength']">El teléfono no debe exceder los 10 dígitos.</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="juegoFavorito">Juego Favorito</label>
+      <select id="juegoFavorito" formControlName="juegoFavorito">
+        <option value="preguntados">Preguntados</option>
+        <option value="mayorOmenor">Mayor o Menor</option>
+        <option value="solitario">Solitario</option>
+        <option value="ahorcado">Ahorcado</option>
+      </select>
+      <div *ngIf="form.get('juegoFavorito')?.invalid && (form.get('juegoFavorito')?.dirty || form.get('juegoFavorito')?.touched || submitted)" class="error-message">
+        <div *ngIf="form.get('juegoFavorito')?.errors?.['required']">Debes seleccionar un juego.</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="puntaje">Puntaje del 1 al 10</label>
+      <input type="range" id="puntaje" formControlName="puntaje" min="1" max="10">
+      <p class="range-value">Valor: {{ form.get('puntaje')?.value }}</p>
+      <div *ngIf="form.get('puntaje')?.invalid && (form.get('puntaje')?.dirty || form.get('puntaje')?.touched || submitted)" class="error-message">
+        <div *ngIf="form.get('puntaje')?.errors?.['required']">El puntaje es requerido.</div>
+        <div *ngIf="form.get('puntaje')?.errors?.['min']">El puntaje mínimo es 1.</div>
+        <div *ngIf="form.get('puntaje')?.errors?.['max']">El puntaje máximo es 10.</div>
+      </div>
+    </div>
+
+    <button type="submit" [disabled]="form.invalid">Enviar Encuesta</button>
+  </form>
+</div>

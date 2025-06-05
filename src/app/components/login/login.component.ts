@@ -14,27 +14,43 @@ import { AuthService } from '../../services/auth.service';
 export class LoginComponent {
   modo = true;
   
-  // Variables para login
   usuarioLogin: string = "";
   passwordLogin: string = "";
   
-  // Variables para registro
   usuarioSingup: string = "";
   passwordSingup: string = "";
   confirmPassword: string = "";
   email: string = "";
   
-  // Variables para el avatar
   avatarFile: File | null = null;
+  errorMessage: string | null = null; // Added error message property
 
   constructor(private router: Router, private authService: AuthService) {}
 
   cambiarEstado() {
     this.modo = !this.modo;
+    this.errorMessage = null; // Clear error when switching modes
   }
 
-  login() {
-    this.authService.login(this.usuarioLogin, this.passwordLogin);
+  async login(event?: Event) {
+    event?.preventDefault();
+    event?.stopPropagation(); // Añade esto para mayor seguridad
+    this.errorMessage = null;
+    
+    try {
+      const { data, error } = await this.authService.login(this.usuarioLogin, this.passwordLogin);
+      
+      if (error) {
+        this.errorMessage = 'Email o contraseña incorrectos';
+        // Forzar la detección de cambios (solución adicional)
+        setTimeout(() => {}, 0);
+      } else if (data?.user) {
+        this.router.navigate(['/home']);
+      }
+    } catch (error) {
+      this.errorMessage = 'Error al conectar con el servidor';
+      console.error('Login exception:', error);
+    }
   }
 
   logout() {
@@ -48,15 +64,16 @@ export class LoginComponent {
   }
 
   fillQuickAccess(): void {
-    this.usuarioLogin = 'tester@tester.com'; // Auto-fill email
-    this.passwordLogin = 'tester';           // Auto-fill password
+    this.usuarioLogin = 'tester@tester.com'; 
+    this.passwordLogin = 'tester';           
   }
 
   register() {
     if (this.passwordSingup !== this.confirmPassword) {
-      console.error('Las contraseñas no coinciden');
+      this.errorMessage = 'Las contraseñas no coinciden'; // Set error message in Spanish
       return;
     }
+    this.errorMessage = null; // Reset error message
     this.authService.register(
       this.email,
       this.passwordSingup,

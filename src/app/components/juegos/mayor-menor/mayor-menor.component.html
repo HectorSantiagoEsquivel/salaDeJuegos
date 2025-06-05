@@ -1,0 +1,50 @@
+<div class="game-table">
+  <div class="wooden-frame">
+    <div class="green-felt-surface">
+      <div class="game-container">
+        <h1>Mayor o Menor</h1>
+        
+        <div *ngIf="!gameStarted && !gameOver" class="start-screen">
+          <button (click)="startGame()">Comenzar Juego</button>
+        </div>
+        
+        <div *ngIf="gameStarted" class="game-screen">
+          <div class="cards-row">
+            <div class="current-card">
+              <h2>Carta Actual:</h2>
+              <app-card [card]="currentCard" [visible]="true"></app-card>
+            </div>
+            
+            <div class="next-card" *ngIf="showNextCard && nextCard">
+              <h2>Próxima Carta:</h2>
+              <app-card [card]="nextCard" [visible]="true"></app-card>
+            </div>
+          </div>
+          
+          <div class="controls">
+            <button 
+              [class.disabled]="gameOver || showNextCard"
+              (click)="!gameOver && !showNextCard && makeGuess(true)">
+              Mayor
+            </button>
+            <button 
+              [class.disabled]="gameOver || showNextCard"
+              (click)="!gameOver && !showNextCard && makeGuess(false)">
+              Menor
+            </button>
+          </div>
+          
+          <div class="message">{{ message }}</div>
+          <div class="info-row">
+            <div class="score">Puntuación: {{ score }}</div>
+            <div class="cards-left">Cartas restantes: {{ deck.length }}</div>
+          </div>
+        </div>
+        
+        <div *ngIf="gameOver" class="game-over">
+          <button (click)="initializeGame()">Jugar de Nuevo</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

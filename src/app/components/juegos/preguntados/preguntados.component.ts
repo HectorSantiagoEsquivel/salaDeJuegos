@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { PreguntadosService } from '../../../services/preguntados.service';
 import { Router } from '@angular/router';
 import { Pokemon } from '../../../interfaces/pokemon';
+import { PuntajeService } from '../../../services/puntaje.service';
 import Swal, { SweetAlertResult } from 'sweetalert2';
 
 @Component({
@@ -19,13 +20,14 @@ export class PreguntadosComponent {
   opcionTres!: string;
   opcionCuatro!: string;
   score: number = 0;
-  tiempoRestante: number = 7;
+  tiempoRestante: number = 10;
   tiempoTerminado: boolean = false;
   intervalId: any;
   mostrarImagen = false;
 
   constructor(
     private preguntadosServ: PreguntadosService,
+    private puntajeService: PuntajeService,
     private router: Router
   ) {}
 
@@ -91,16 +93,37 @@ export class PreguntadosComponent {
   }
 
   verificarTiempo() {
-    if (this.tiempoRestante === 0) {
+    if (this.tiempoRestante === 0) 
+    {
+      this.finalizarJuego();
+      return true;
+    }
+    return false;
+  }
+
+    finalizarJuego() {
+      this.detenerContador();
+      this.puntajeService.guardarPuntos("preguntados", this.score);
+
       Swal.fire({
-        icon: 'error',
-        title: 'Perdiste',
+        icon: 'info',
+        title: 'Juego Terminado',
+        html: `
+          <div style="font-size: 1.2rem; margin-bottom: 1rem;">
+            Tu puntuación: <strong>${this.score}</strong>
+          </div>
+          <div>¿Qué te gustaría hacer ahora?</div>
+        `,
         showCancelButton: true,
-        confirmButtonText: 'Reiniciar',
+        confirmButtonText: 'Jugar de Nuevo',
         cancelButtonText: 'Volver al Menú',
         reverseButtons: true,
         backdrop: true,
         allowOutsideClick: false,
+        customClass: {
+          popup: 'swal-custom-popup',
+          title: 'swal-custom-title'
+        }
       }).then((r) => {
         if (r.isConfirmed) {
           this.reiniciarJuego();
@@ -108,10 +131,7 @@ export class PreguntadosComponent {
           this.volverAlHome();
         }
       });
-      return true;
     }
-    return false;
-  }
 
 verificarRespuesta(opcionObtenida: string): void {
   if (opcionObtenida === this.pokemonCorrecto?.name) {
@@ -125,27 +145,12 @@ verificarRespuesta(opcionObtenida: string): void {
       this.inicializarJuego();        // Carga nueva pregunta
       this.iniciarContador();         // Reinicia timer
     }, 1000); // Espera 1 segundo mostrando el sprite
-  } else {
-    this.detenerContador();
-    Swal.fire({
-      icon: 'error',
-      title: 'Perdiste',
-      showCancelButton: true,
-      confirmButtonText: 'Reiniciar',
-      cancelButtonText: 'Volver al Menú',
-      reverseButtons: true,
-      backdrop: true,
-      allowOutsideClick: false,
-    }).then((r) => {
-      if (r.isConfirmed) {
-        this.reiniciarJuego();
-      } else if (r.dismiss === Swal.DismissReason.cancel) {
-        this.volverAlHome();
-      }
-    });
+  } else 
+  {
+    this.finalizarJuego();
   }
 
-  if (this.score === 10) {
+  /*if (this.score === 10) {
     this.detenerContador();
     Swal.fire({
       icon: 'success',
@@ -163,7 +168,7 @@ verificarRespuesta(opcionObtenida: string): void {
         this.volverAlHome();
       }
     });
-  }
+  }*/
 }
 
 

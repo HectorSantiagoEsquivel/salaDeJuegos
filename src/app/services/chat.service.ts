@@ -58,7 +58,7 @@ export class ChatService {
   }
 
   async sendMessage(text: string): Promise<void> {
-    if (!this._currentUserData || !text.trim()) return;
+    if (!this._currentUserData.value || !text.trim()) return; // Access .value for BehaviorSubject
 
     try {
       const { error } = await supabase
@@ -70,8 +70,7 @@ export class ChatService {
 
       if (error) throw error;
 
-      // Recargar los mensajes después de enviar uno nuevo
-      await this.loadInitialData();
+      // REMOVE THIS LINE: await this.loadInitialData(); // Real-time subscription will handle updates
     } catch (error) {
       console.error('Error al enviar mensaje:', error);
       throw error;
@@ -84,14 +83,35 @@ export class ChatService {
       .on(
         'postgres_changes',
         {
-          event: 'INSERT',
+          event: '*', // Listen for all events (INSERT, UPDATE, DELETE)
           schema: 'public',
           table: 'mensajes'
         },
-        (payload) => callback(payload.new as Message)
+        async (payload) => { // Make this async to fetch user data
+          if (payload.eventType === 'INSERT') {
+            // Fetch user data for the new message
+            const { data: userData, error: userError } = await supabase
+              .from('usuarios')
+              .select('name')
+              .eq('authId', (payload.new as Message).idUsuario)
+              .single();
+
+            if (userError) {
+              console.error('Error fetching user data for new message:', userError);
+              return;
+            }
+
+            const newMessageWithUser = {
+              ...(payload.new as Message),
+              usuarios: [userData] // Attach the fetched user data
+            };
+            callback(newMessageWithUser);
+          }
+        }
       )
       .subscribe();
   }
+
 
   formatDate(isoDate: string): string {
     const date = new Date(isoDate);

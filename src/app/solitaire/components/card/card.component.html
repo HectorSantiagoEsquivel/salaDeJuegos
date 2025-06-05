@@ -1,0 +1,7 @@
+@if (!visible) {
+<div class="card hidden" [ngStyle]="getCardStyle()"></div>
+} @else {
+@if (card) {
+<div class="card" [ngStyle]="getCardStyle(card)"></div>
+}
+}

@@ -1,0 +1,59 @@
+<div class="puntajes-container">
+  <h1 class="titulo-principal">Puntajes de Juegos</h1>
+
+  <div class="juego-container">
+    <h2 class="juego-titulo">Ahorcado</h2>
+    <div class="puntajes-list">
+      <div *ngFor="let puntaje of ahorcado" class="puntaje-item">
+        <span class="usuario">{{puntaje.usuario?.name || 'Anónimo'}}</span>
+        <span class="puntos">{{puntaje.puntos}} pts</span>
+        <span class="fecha">{{puntaje.fechaFormateada}}</span>
+      </div>
+      <div *ngIf="ahorcado.length === 0" class="sin-puntajes">
+        No hay puntajes registrados
+      </div>
+    </div>
+  </div>
+
+  <div class="juego-container">
+    <h2 class="juego-titulo">Mayor o Menor</h2>
+    <div class="puntajes-list">
+      <div *ngFor="let puntaje of mayormenor" class="puntaje-item">
+        <span class="usuario">{{puntaje.usuario?.name || 'Anónimo'}}</span>
+        <span class="puntos">{{puntaje.puntos}} pts</span>
+        <span class="fecha">{{puntaje.fechaFormateada}}</span>
+      </div>
+      <div *ngIf="mayormenor.length === 0" class="sin-puntajes">
+        No hay puntajes registrados
+      </div>
+    </div>
+  </div>
+
+  <div class="juego-container">
+    <h2 class="juego-titulo">Preguntados</h2>
+    <div class="puntajes-list">
+      <div *ngFor="let puntaje of preguntados" class="puntaje-item">
+        <span class="usuario">{{puntaje.usuario?.name || 'Anónimo'}}</span>
+        <span class="puntos">{{puntaje.puntos}} pts</span>
+        <span class="fecha">{{puntaje.fechaFormateada}}</span>
+      </div>
+      <div *ngIf="preguntados.length === 0" class="sin-puntajes">
+        No hay puntajes registrados
+      </div>
+    </div>
+  </div>
+
+  <div class="juego-container">
+    <h2 class="juego-titulo">Solitario</h2>
+    <div class="puntajes-list">
+      <div *ngFor="let puntaje of solitario" class="puntaje-item">
+        <span class="usuario">{{puntaje.usuario?.name || 'Anónimo'}}</span>
+        <span class="puntos">{{puntaje.puntos}} movimientos</span>
+        <span class="fecha">{{puntaje.fechaFormateada}}</span>
+      </div>
+      <div *ngIf="solitario.length === 0" class="sin-puntajes">
+        No hay puntajes registrados
+      </div>
+    </div>
+  </div>
+</div>

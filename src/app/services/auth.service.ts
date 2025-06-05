@@ -16,19 +16,18 @@ export class AuthService {
   constructor(private router: Router) {}
 
   async login(email: string, password: string) {
-    return supabase.auth.signInWithPassword({
-      email: email,
-      password: password,
-    }).then(({ data, error }) => {
-      if (error) {
-        console.error('Error:', error.message);
-      } else {
-        this.router.navigate(['/home']);
-      }
+    try {
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email: email,
+        password: password
+      });
+      
       return { data, error };
-    });
+    } catch (error) {
+      console.error('Login error:', error);
+      return { data: null, error: error instanceof Error ? error : new Error('Unknown error') };
+    }
   }
-
   async logout() {
     const { error } = await supabase.auth.signOut();
     if (!error) {
@@ -63,7 +62,7 @@ export class AuthService {
 
       if (authError) return { error: authError };
 
-      // Manejo de avatar
+      
       let avatar_url = null;
       if (avatarFile) {
         const uploadResult = await this.saveFile(avatarFile);

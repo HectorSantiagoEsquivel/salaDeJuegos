@@ -5,7 +5,12 @@
       <h2 [class.active]="!modo" (click)="cambiarEstado()">Registrarme</h2>
     </div>
 
-    <form *ngIf="modo" (ngSubmit)="login()">
+    <!-- Add this error message div -->
+    <div *ngIf="errorMessage" class="error-message fadeIn">
+      {{errorMessage}}
+    </div>
+
+    <form *ngIf="modo" (ngSubmit)="$event.preventDefault(); login()">
       <input type="email" id="usuarioLogin" class="fadeIn third" [(ngModel)]="usuarioLogin" name="usuarioLogin" placeholder="Email" required>
       <input type="password" id="passwordLogin" class="fadeIn second" [(ngModel)]="passwordLogin" name="passwordLogin" placeholder="Contraseña" required>
       
@@ -14,7 +19,7 @@
       <input type="submit" class="fadeIn fourth" value="Log In">
     </form>
 
-    <form *ngIf="!modo" (ngSubmit)="register()">
+    <form *ngIf="!modo" (ngSubmit)="register(); $event.preventDefault()">
       <input type="text" id="usuarioSingup" class="fadeIn third" [(ngModel)]="usuarioSingup" name="usuarioSingup" placeholder="Nombre de usuario" required>
       <input type="email" id="email" class="fadeIn second" [(ngModel)]="email" name="email" placeholder="Email" required>
       <input type="password" id="passwordSingup" class="fadeIn second" [(ngModel)]="passwordSingup" name="passwordSingup" placeholder="Contraseña" required>

@@ -1,0 +1,47 @@
+<div class="game-table">
+    <div class="wooden-frame">
+        <div class="green-felt-surface">
+            <div cdkDropListGroup class="game-container">
+                <div class="header">
+                    <p>Movimientos: {{movements}}</p>
+                    <button (click)="reiniciarJuego()">Reiniciar</button>
+                    <button (click)="undo()">Deshacer</button>
+                </div>
+
+                <div class="top">
+                    @for (foundation of foundations; track index; let index = $index) {
+                    <div class="pile-container">
+                        <app-pile class="foundation index-{{index}}" [cards]="foundation" [visible]="true"
+                            (click)="solveFoundation(index)" [hasDrop]="!!dragFrom"
+                            (dragStarted)="dragStarted({prop: 'foundations', pileIndex: index})" (dragEnded)="dragEnded()"
+                            (dropped)="dropped({prop: 'foundations', index: index})"></app-pile>
+                    </div>
+                    }
+                    <div class="separator"></div>
+                    <app-pile class="active-stock" [dropDisabled]="true" [cards]="activeStock" [visible]="true"
+                        (click)="solveActiveStock()" (dragStarted)="dragStarted({prop: 'activeStock'})"
+                        (dragEnded)="dragEnded()"></app-pile>
+                    <app-pile class="stock" [cards]="stock" [visible]="false" [dragDisabled]="true" [dropDisabled]="true"
+                        (click)="solveStock()"></app-pile>
+                </div>
+
+                <div class="piles">
+                    @for (pile of piles; track index; let index = $index) {
+                    <div class="pile">
+                        <app-pile [cards]="pile" [dragDisabled]="true" [dropDisabled]="true" [stacked]="false"></app-pile>
+                        <app-pile class="solved-pile index-{{index}}" [placeholder]="false" [cards]="solvedPiles[index]"
+                            [stacked]="false" [visible]="true" [hasDrop]="!!dragFrom"
+                            (dropped)="dropped({prop: 'solvedPiles', index: index})"
+                            (dragStarted)="dragStarted({prop: 'solvedPiles', pileIndex: index, cardIndex: $event})"
+                            (dragEnded)="dragEnded()" (clickCard)="moveSolvedPile(index, $event)"></app-pile>
+                    </div>
+                    }
+                </div>
+                @if (animatingCards.length > 0) {
+                <app-pile class="animate-pile" [ngStyle]="animatingStyle" [cards]="animatingCards" [stacked]="false"
+                    [visible]="true"></app-pile>
+                }
+            </div>
+        </div>
+    </div>
+</div>

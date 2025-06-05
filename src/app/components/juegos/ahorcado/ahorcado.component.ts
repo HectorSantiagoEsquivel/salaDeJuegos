@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
+import { K } from '@angular/cdk/keycodes';
+import { PuntajeService } from '../../../services/puntaje.service';
 
 @Component({
   selector: 'app-ahorcado',
@@ -66,8 +69,12 @@ export class AhorcadoComponent {
     return this.palabras[i];
   }
   
-  constructor() {
+  constructor(
+    private puntajeService: PuntajeService,
+    private router: Router
+  ) {
     this.iniciarJuego();
+    
   }
 
   iniciarJuego() {
@@ -111,38 +118,50 @@ export class AhorcadoComponent {
   }
 
   mostrarResultado(ganaste: boolean) {
+    if(ganaste)
+    {
+      this.puntajeService.guardarPuntos("ahorcado",this.aciertos*this.vidas);
+    }
     const titulo = ganaste ? '¡Ganaste!' : '¡Perdiste!';
     const mensaje = ganaste 
       ? `Adivinaste la palabra: ${this.palabraAAdivinar}`
       : `La palabra era: ${this.palabraAAdivinar}`;
-    const icono = ganaste ? 'success' : 'error';
 
-    Swal.fire({
-      title: titulo,
-      text: mensaje,
-      icon: icono,
-      confirmButtonText: 'Jugar de nuevo',
-      cancelButtonText: 'Salir',
-      showCancelButton: true,
-      background: '#f8f9fa',
-      backdrop: `
-        rgba(0,0,0,0.5)
-        url("/assets/images/confetti.gif")
-        center top
-        no-repeat
-      `,
-      allowOutsideClick: false
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.reiniciarJuego();
-      } else if (result.dismiss === Swal.DismissReason.cancel) {
-        // Aquí puedes redirigir al menú principal si lo deseas
-        // this.router.navigate(['/']);
-      }
-    });
+
+      Swal.fire({
+        icon: 'info',
+        title: 'Juego Terminado',
+        html: `
+          <div style="font-size: 1.2rem; margin-bottom: 1rem;">
+            ${mensaje}
+            Tu puntuación: <strong>${this.aciertos*this.vidas}</strong>
+          </div>
+          <div>¿Qué te gustaría hacer ahora?</div>
+        `,
+        showCancelButton: true,
+        confirmButtonText: 'Jugar de Nuevo',
+        cancelButtonText: 'Volver al Menú',
+        reverseButtons: true,
+        backdrop: true,
+        allowOutsideClick: false,
+        customClass: {
+          popup: 'swal-custom-popup',
+          title: 'swal-custom-title'
+        }
+      }).then((r) => {
+        if (r.isConfirmed) {
+          this.reiniciarJuego();
+        } else if (r.dismiss === Swal.DismissReason.cancel) {
+          this.volverAlHome();
+        }
+      });
   }
 
   reiniciarJuego() {
     this.iniciarJuego();
+  }
+
+    volverAlHome() {
+    this.router.navigateByUrl('/home');
   }
 }

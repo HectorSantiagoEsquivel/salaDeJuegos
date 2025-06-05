@@ -1,0 +1,287 @@
+/* Estilos base para la mesa de juego */
+.game-table {
+  width: 100%;
+  min-height: 100vh;
+  padding: 20px;
+  background: #56baed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+/* Marco de madera exterior */
+.wooden-frame {
+  width: 100%;
+  max-width: 800px; /* Un poco más ancho para acomodar las cartas lado a lado */
+  padding: 15px;
+  background: #5d4037;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  
+  /* Textura de madera */
+  background-image: 
+    linear-gradient(to right, rgba(94, 66, 55, 0.8), rgba(76, 52, 43, 0.8)),
+    url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path d="M0,50 L100,50 M50,0 L50,100" stroke="%233e2723" stroke-width="1" opacity="0.3"/></svg>');
+}
+
+/* Superficie verde de fieltro */
+.green-felt-surface {
+  width: 100%;
+  background: #0a5c36;
+  border-radius: 8px;
+  padding: 25px;
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+  
+  /* Textura del fieltro */
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+      radial-gradient(circle at 20% 30%, rgba(255,255,255,0.1) 0%, transparent 25%),
+      radial-gradient(circle at 80% 70%, rgba(255,255,255,0.1) 0%, transparent 25%);
+  }
+}
+
+/* Contenedor principal del juego */
+.game-container {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  font-family: 'Arial', sans-serif;
+  position: relative;
+  z-index: 2;
+  color: white;
+  
+  h1 {
+    margin-bottom: 1.5rem;
+    color: #fff;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    font-size: 2.2rem;
+  }
+}
+
+/* Pantalla de inicio */
+.start-screen {
+  margin: 2rem 0;
+  
+  button {
+    font-size: 1.2rem;
+    padding: 12px 25px;
+  }
+}
+
+/* Área principal del juego */
+.game-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+/* Fila de cartas (actual y siguiente) */
+.cards-row {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  width: 100%;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  
+  @media (max-width: 600px) {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+}
+
+/* Estilos para ambas cartas */
+.current-card, .next-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 160px;
+  transition: all 0.3s ease;
+  
+  h2 {
+    margin-bottom: 0.8rem;
+    color: white;
+    font-size: 1.3rem;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+  }
+  
+  app-card {
+    transition: transform 0.3s;
+    
+    &:hover {
+      transform: translateY(-5px) scale(1.03);
+    }
+  }
+}
+
+/* Controles del juego */
+.controls {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 1rem;
+  
+  button {
+    min-width: 120px;
+    font-size: 1.1rem;
+    padding: 12px 20px;
+    letter-spacing: 0.5px;
+  }
+  
+  @media (max-width: 500px) {
+    flex-direction: column;
+    gap: 0.8rem;
+    width: 100%;
+    max-width: 250px;
+    
+    button {
+      width: 100%;
+    }
+  }
+}
+
+/* Mensajes del juego */
+.message {
+  margin: 1.5rem 0;
+  font-size: 1.2rem;
+  min-height: 50px;
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+  padding: 0.8rem 1.2rem;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  max-width: 90%;
+}
+
+/* Fila de información (puntuación y cartas) */
+.info-row {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  max-width: 500px;
+  margin-top: 1rem;
+  font-size: 1.1rem;
+  gap: 1.5rem;
+  
+  div {
+    background: rgba(93, 64, 55, 0.7);
+    padding: 0.6rem 1.2rem;
+    border-radius: 6px;
+    min-width: 160px;
+  }
+  
+  @media (max-width: 500px) {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+  }
+}
+
+/* Pantalla de fin de juego */
+.game-over {
+  margin: 2rem 0;
+  
+  button {
+    font-size: 1.2rem;
+    padding: 12px 30px;
+    background-color: #8d6e63;
+    
+    &:hover {
+      background-color: #6d4c41;
+    }
+  }
+}
+
+/* Estilos generales para botones */
+button {
+  padding: 10px 20px;
+  margin: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+  background-color: #5d4037;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  box-shadow: 0 4px 0 #3e2723;
+  transition: all 0.2s;
+  
+  &:hover {
+    background-color: #4e342e;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 0 #3e2723;
+  }
+  
+  &:active {
+    transform: translateY(1px);
+    box-shadow: 0 3px 0 #3e2723;
+  }
+}
+
+/* Efectos de animación */
+@keyframes cardReveal {
+  0% { transform: scale(0.9); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.next-card {
+  animation: cardReveal 0.5s ease-out;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.congratulations {
+  animation: pulse 2s infinite;
+}
+
+/* Estilos responsivos adicionales */
+@media (max-width: 768px) {
+  .wooden-frame {
+    padding: 12px;
+  }
+  
+  .green-felt-surface {
+    padding: 20px;
+  }
+  
+  .game-container h1 {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .game-table {
+    padding: 15px 10px;
+  }
+  
+  .wooden-frame {
+    padding: 10px;
+  }
+  
+  .green-felt-surface {
+    padding: 15px;
+  }
+  
+  .cards-row {
+    gap: 1.2rem;
+  }
+  
+  .message {
+    font-size: 1rem;
+    padding: 0.6rem 1rem;
+  }
+}

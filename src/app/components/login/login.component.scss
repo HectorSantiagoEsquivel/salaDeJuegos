@@ -25,7 +25,9 @@ $error-color: #ff3860;
   box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
   text-align: center;
   animation: fadeInDown 1s ease;
-  box-sizing: border-box; /* Ensures padding is included in element's total width and height */
+  box-sizing: border-box;
+  position: relative; /* Añade esto */
+  overflow: visible; /* Ensures padding is included in element's total width and height */
 
   /* Tabs Login/Registro */
   .tabs {
@@ -155,9 +157,22 @@ $error-color: #ff3860;
 
   /* Mensajes de error (opcional) */
   .error-message {
-    color: $error-color;
-    font-size: 12px;
-    margin-top: 5px;
+    /* Fuerza la visibilidad con !important */
+    color: $error-color !important;
+    background-color: #ffebee !important;
+    padding: 12px !important;
+    margin: 15px auto !important;
+    border: 1px solid $error-color !important;
+    border-radius: 4px !important;
+    font-size: 14px !important;
+    text-align: center !important;
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    position: relative !important;
+    z-index: 1000 !important;
+    width: 85% !important;
+    box-sizing: border-box !important;
   }
 }
 

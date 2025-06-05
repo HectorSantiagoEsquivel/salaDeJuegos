@@ -91,6 +91,11 @@
               {
                 "glob": "**/*",
                 "input": "public"
+              },
+              {
+                "glob": "**/*",
+                "input": "src/assets/solitaire-cards",
+                "output": "assets/solitaire-cards/"
               }
             ],
 
