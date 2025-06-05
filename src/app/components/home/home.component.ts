@@ -18,25 +18,25 @@ export class HomeComponent {
       url: '../../../assets/images/preguntados.png',
       titulo: "Preguntados",
       descripcion: "¿Podrás adivinar de qué Pokémon se trata solo viendo su silueta? Demostrá tu memoria y conocimiento de la Pokédex en este desafío inspirado en el clásico segmento del anime.",
-      route: '/preguntados' // Add the route for each game
+      route: '/preguntados' 
     },
     {
       id: 1,
       url: '../../../assets/images/ahorcado.png',
       titulo: "Ahorcado",
       descripcion: "El clásico juego de las letras donde tenés que adivinar una palabra oculta, eligiendo una letra por vez.",
-      route: '/ahorcado' // Add the route for each game
+      route: '/ahorcado' 
     },
     {
       id: 2,
-      url: '../../../assets/images/solitario.png', // Add solitaire image
+      url: '../../../assets/images/solitario.png', 
       titulo: "Solitario",
       descripcion: "El clásico juego de cartas. Ordená las cartas por palo y número para ganar.",
       route: '/solitario'
     },
     {
       id: 3,
-      url: '../../../assets/images/mayormenor.png', // Add solitaire image
+      url: '../../../assets/images/mayormenor.png', 
       titulo: "Mayor o Menor",
       descripcion: "Demostra tu suerte y memoria en este juego de cartas",
       route: '/mayormenor'

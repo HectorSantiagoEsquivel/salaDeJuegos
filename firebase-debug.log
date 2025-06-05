@@ -1,0 +1,16 @@
+[debug] [2025-06-05T22:02:09.018Z] ----------------------------------------------------------------------
+[debug] [2025-06-05T22:02:09.045Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Santiago\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy --only hosting
+[debug] [2025-06-05T22:02:09.047Z] CLI Version:   14.2.2
+[debug] [2025-06-05T22:02:09.048Z] Platform:      win32
+[debug] [2025-06-05T22:02:09.048Z] Node Version:  v22.14.0
+[debug] [2025-06-05T22:02:09.048Z] Time:          Thu Jun 05 2025 19:02:09 GMT-0300 (Argentina Standard Time)
+[debug] [2025-06-05T22:02:09.049Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-06-05T22:02:10.138Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-06-05T22:02:10.139Z] > authorizing via signed-in user (hectorsantiagoesquivel@gmail.com)
+[debug] [2025-06-05T22:02:10.139Z] [iam] checking project sala-de-juegos-d282c for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2025-06-05T22:02:10.141Z] Checked if tokens are valid: false, expires at: 1749117614033
+[debug] [2025-06-05T22:02:10.142Z] Checked if tokens are valid: false, expires at: 1749117614033
+[debug] [2025-06-05T22:02:10.142Z] > refreshing access token with scopes: []
+[debug] [2025-06-05T22:02:10.145Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2025-06-05T22:02:10.145Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]

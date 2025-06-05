@@ -39,6 +39,6 @@ async checkAuthState() {
   async logout() {
     await supabase.auth.signOut();
     this.isLoggedIn = false;
-    this.router.navigate(['/']);
+    this.router.navigate(['/login']);
   }
 }

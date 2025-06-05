@@ -68,18 +68,44 @@ export class LoginComponent {
     this.passwordLogin = 'tester';           
   }
 
-  register() {
-    if (this.passwordSingup !== this.confirmPassword) {
-      this.errorMessage = 'Las contraseñas no coinciden'; // Set error message in Spanish
+  async register() {
+    if(this.email == '' || this.usuarioSingup== '' || this.passwordSingup == '' || this.confirmPassword == '')
+    {
+      this.errorMessage = 'Por favor complete todos los campos';
       return;
     }
-    this.errorMessage = null; // Reset error message
-    this.authService.register(
+    else if(!this.email.includes('@') || !this.email.includes('.')) 
+    {
+    this.errorMessage = 'Ingrese un email válido';
+    return;
+    }
+    else if (this.passwordSingup !== this.confirmPassword) 
+    {
+      this.errorMessage = 'Las contraseñas no coinciden'; 
+      return;
+    }
+    else if(!/[A-Z]/.test(this.passwordSingup) || 
+    !/[0-9]/.test(this.passwordSingup) ||
+    !/[@$!%*?&]/.test(this.passwordSingup))
+    {
+      this.errorMessage = 'Contraseña debe incluir una mayuscula, un numero y un caracter especial (@$!%*?&)'; 
+      return;
+    }
+
+    this.errorMessage = null; 
+    const resultado=await this.authService.register(
       this.email,
       this.passwordSingup,
       this.usuarioSingup,
       this.avatarFile
     );
+
+    if(resultado.error)
+    {
+      this.errorMessage = 'El mail ya esta registrado'; 
+      return;
+    }
+
   }
 
   onFileSelected(event: any) {

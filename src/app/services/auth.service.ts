@@ -50,6 +50,12 @@ export class AuthService {
 
     try {
       // Registro en Auth
+      const { data: existingUser, error: checkError } = await this.getUserDataByMail(email);
+
+      if (existingUser) {
+      return { error: { message: 'El email ya está registrado' } };
+      }
+
       const { data: authData, error: authError } = await supabase.auth.signUp({
         email: email,
         password: password,

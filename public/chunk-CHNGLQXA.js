@@ -1,0 +1,7 @@
+import{a as h}from"./chunk-PAP2UETD.js";import{a as i}from"./chunk-DVA2SMLH.js";import{N as p,S as f,g as m}from"./chunk-353TJUNG.js";import{a as u,b as c,h as n}from"./chunk-FK42CRUA.js";var d=class o{constructor(t){this.authService=t}_currentUserData=new m(null);currentUserData$=this._currentUserData.asObservable();obtenerPuntajesPorJuego(t,r=!0){return n(this,null,function*(){try{let{data:a,error:e}=yield i.from("puntajes").select(`
+        id,
+        puntos,
+        created_at,
+        juego,
+        usuario:usuarios(name)
+      `).eq("juego",t).order("puntos",{ascending:r}).order("created_at",{ascending:!1});if(e)throw e;return a.map(s=>c(u({},s),{fechaFormateada:this.formatDate(s.created_at),puntos:Number(s.puntos)}))}catch(a){throw console.error("Error al obtener puntajes:",a),a}})}formatDate(t){let r=new Date(t);return`${r.getDate()}/${r.getMonth()+1}/${r.getFullYear()} ${r.getHours()}:${r.getMinutes().toString().padStart(2,"0")}`}guardarPuntos(t,r){return n(this,null,function*(){let a=yield this.authService.getUserProfile();if(this._currentUserData.next(a),!(!this._currentUserData.value||!t.trim()||isNaN(r)))try{let{error:e}=yield i.from("puntajes").insert({id_usuario:this._currentUserData.value?.authId,puntos:r,juego:t.trim()});if(e)throw e}catch(e){throw console.error("Error al guardar puntos:",e),e}})}static \u0275fac=function(r){return new(r||o)(f(h))};static \u0275prov=p({token:o,factory:o.\u0275fac,providedIn:"root"})};export{d as a};
